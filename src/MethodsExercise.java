@@ -28,11 +28,11 @@ public class MethodsExercise {
         int userInput = sc.nextInt();
         if (userInput >= min && userInput <= max) {
             System.out.println("You're age is " + userInput);
+            return 1;
         } else {
             System.out.println("Please enter a valid number again.");
-            getInteger(min, max);
         }
-        return 1;
+        return getInteger(min, max);
     }
 
 
