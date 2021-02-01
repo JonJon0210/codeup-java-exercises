@@ -37,10 +37,10 @@ public class MethodsExercise {
 //
 //    }
 
-    public static int diceSides(int dice1, int dice2) {
-        Scanner sc = new Scanner(System.in);
-        int userInput = sc.nextInt();
-    }
+//    public static int diceSides(int dice1, int dice2) {
+//        Scanner sc = new Scanner(System.in);
+//        int userInput = sc.nextInt();
+//    }
 
 
     public static void main(String[] args) {
@@ -59,9 +59,9 @@ public class MethodsExercise {
 
 //        System.out.println("Enter a number between 1 and 10: ");
 //        int userInput = getInteger(1, 10);
-
-        System.out.println("How many sides on your pair of dice?");
-        int userInput = diceSides (dice1, dice2);
+//
+//        System.out.println("How many sides on your pair of dice?");
+//        int userInput = diceSides (dice1, dice2);
 
 
     }
