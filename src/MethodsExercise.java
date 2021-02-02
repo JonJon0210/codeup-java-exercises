@@ -2,67 +2,148 @@ import java.util.Scanner;
 
 
 public class MethodsExercise {
-
-    public static int addMe(int value1, int value2) {
-        return value1 + value2;
+    // Method Structure
+    public static int addNumbers(int num1, int num2) {
+        return num1 + num2; // because the type is "int" - this method must return an "int"
     }
 
-    public static int subtractMe(int value1, int value2) {
-        return value1 - value2;
+    public int subtractNumbers(int num1, int num2) {
+        return num1 - num2;
     }
 
-    public static int multiplyMe(int value1, int value2) {
-        return value1 * value2;
+    public void greetings() {
+        // void methods can be static or non-static - main point is that they will NOT have to return anything
+        System.out.println("Hello, to you!");
+        // this is not returning anything
     }
-
-    public static int divideMe(int value1, int value2) {
-        return value1 / value2;
-    }
-
-    public static int getInteger(int min, int max) {
-        Scanner sc = new Scanner(System.in);
-        int userInput = sc.nextInt();
-        if (userInput >= min && userInput <= max) {
-            System.out.println("Your number is " + userInput);
-            return 1;
-        } else {
-            System.out.println("Please enter a valid number again.");
-        }
-        return getInteger(min, max);
-    }
-
-//    public static int getFactorial () {
-//        Scanner sc = new Scanner(System.in);
-//        int userInput = sc.nextInt();
-//
-//    }
-
-//    public static int diceSides(int dice1, int dice2) {
-//        Scanner sc = new Scanner(System.in);
-//        int userInput = sc.nextInt();
-//    }
-
 
     public static void main(String[] args) {
+        // This main method can be seen as separate from the MethodsLec class, so we need to instantiate all variables
+        //   again, that we want to use in logical calculations here
 
-        int sum = MethodsExercise.addMe(1, 2);
+        // Let's add 2 numbers.
+
+        // Static
+        int sum = MethodsExercise.addNumbers(2, 2);
+        System.out.println("Using our static method: ");
         System.out.println(sum);
 
-        int difference = MethodsExercise.subtractMe(1, 2);
+        double squaredNumber = Math.pow(3, 2);
+
+        // Math caseyMathMagic = new Math();
+
+        // Non-static
+        MethodsExercise mathWiz = new MethodsExercise();
+        mathWiz.greetings();
+        int difference = mathWiz.subtractNumbers(10, 6); // num1 - num2
+        System.out.println("Using a non-static method: ");
         System.out.println(difference);
 
-        int product = MethodsExercise.multiplyMe(1, 2);
-        System.out.println(product);
+        System.out.println(MethodsExercise.tenureMessage("Casey", "PHP", 11));
+        System.out.println(MethodsExercise.tenureMessage("Daniel", "Java", 15));
+        System.out.println(MethodsExercise.tenureMessage("Fernando", "PHP", 30));
 
-        int quotient = MethodsExercise.divideMe(4, 2);
-        System.out.println(quotient);
+        System.out.println(MethodsExercise.tenureMessage("Casey", "Java"));
+        System.out.println(MethodsExercise.tenureMessage("Go"));
 
-//        System.out.println("Enter a number between 1 and 10: ");
-//        int userInput = getInteger(1, 10);
-//
-//        System.out.println("How many sides on your pair of dice?");
-//        int userInput = diceSides (dice1, dice2);
+        MethodsExercise.sayHello("Bonjour", "Jean Luc");
 
+        // ******* Calling our recursion method ***************//
+        MethodsExercise.count(5);
 
+        // ******* Calling our second recursion method ***************//
+        System.out.println(MethodsExercise.getPower(6, 3));
+        System.out.println(MethodsExercise.getPowerRecursive(3, 5));
+
+        // String thisMessage = MethodsLec.tenureMessage("Java", 20);
+    } // END: psvm
+
+    // Doing an exponent (i.e. 3 ^ 2 = 9) using a for loop
+    public static long getPower(int base, int exponent) { // 1. getPower(6, 3)
+        long result = 1;
+        for (int i = 1; i <= exponent; i++) {
+            result = result * base; // 1. res = 1 * 6;
+            // 2. res = 6 * 6;   (36)
+            // 3. res = 36 * 6;  (216)
+        }
+        return result;
     }
+
+    // Doing an exponent using RECURSION
+    public static long getPowerRecursive(int base, int exponent) { // 1. getPowerRecursive(6, 3)  -- goal: 6 * 6 * 6
+        if (exponent == 0) {
+            return 1; // any number to the power of 0 is equal to 1
+        } else if (exponent == 1) {
+            return base; // any number to the power of 1 is equal to itself
+        } else if (exponent == 2) {
+            return base * base;
+        }
+        return base * getPowerRecursive(base, exponent - 1);  // we want to do 3 ^ 5, i.e. getPowerRecursive(3, 5)
+
+        // 1. return 3 * getPowerRecursive(3, (5-1)), i.e. getPowerRecursive(3, 4)
+        // 2. return 3 * ( 3 * getPowerRecursive(3, (4-1)) ), i.e. getPowerRecursive(3, 3)
+        // 3. return 3 * ( 3 * ( 3 * ( getPowerRecursive(3, (3-1)) ) , i.e. getPowerRecursive(3, 2)
+        //  3.a) return 3 * ( 3 * ( 3 ) ) ) * 3 * 3;
+        ///  = 3 * 3 * 3 * 3 * 3
+        ///  = 3 ^ 5 = 243
+    }
+
+    // start of tenureMessage
+    public static String tenureMessage(String name, String progLang, int numYears) {
+        // String thePersonName = name;
+        // String codingLanguage = progLang;
+        // int totalTime = numYears;
+
+        return name + " has been coding " + progLang + " for " + numYears + " years.";
+        // return "X has done Y for Z years";
+    }
+
+    // ****************** METHOD OVERLOADING ****************** //
+    public static String tenureMessage(String name, String progLang) {
+        return name + " is super good at " + progLang;
+    }
+
+    public static String tenureMessage(String progLang) {
+        return "Somebody is sure to be good at " + progLang;
+    }
+
+    // version 1
+    public static void sayHello(int times) {
+        for (int i = 0; i < times; i += 1) {
+            sayHello(); // calling sayHello()
+        }
+    }
+    // clever version1
+    // public static void sayHello(int rotations) {
+    //     // this will not work, because we already have a version that takes in 1 integer
+    // }
+    // version 2
+    public static void sayHello() {
+        sayHello("Hello", "World"); // calling sayHello(String1, String2)
+    }
+    // version 3
+    public static void sayHello(String name) {
+        sayHello("Hello", name);
+    }
+    // version 4
+    public static void sayHello(String greeting, String name) {
+        System.out.println(greeting + ", " + name + "!");
+    }
+
+    // ******************** RECURSION *********************** //
+    public static void count(int n) { // 1. MethodsLec.count(5)    -- from the PSVM
+        if (n <= 0) {
+            System.out.println("All done!");
+            return;
+        }
+        System.out.println(n);
+        count(n - 1); // 2. count(5-1), i.e. count(4)
+        // 3. count(4-1), i.e. count(3)
+        // 4. count(3-1), i.e. count(2)
+        // 5. count(2-1), i.e. count(1)
+        // 6. count(1-1), i.e. count(0)
+    }
+
+
+
 }
