@@ -11,6 +11,8 @@ public class syntaxLecture {
         // Declarations
         int number;
 
+
+
         //keyboard shortcut for formatting code is CMD option l
 
 
